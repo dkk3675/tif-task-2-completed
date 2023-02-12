@@ -1,7 +1,7 @@
 import { Button, Flex, Box } from "@chakra-ui/react";
-import React from "react";
+import { useEffect } from "react";
 import FormInput from "../../components/formComponents/FormInput";
-import FormSelect from "../../components/formComponents/FormSelect";
+import FormExport from "../../components/formComponents/FormExport";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { PageNumbers } from "../../interface/home";
@@ -9,8 +9,9 @@ import { IRequisitionDetails } from "../../interface/forms";
 import { genderOptions, urgencyOptions } from "./constants";
 
 const RequisitionDetailsForm: React.FC<{
-  handleTab: (n: PageNumbers) => void;
-}> = ({ handleTab }) => {
+  handleTab: (n: PageNumbers) => void,
+  setReqData: (m: IRequisitionDetails) => void;
+}> = ({ handleTab, setReqData }) => {
   const {
     handleChange,
     errors,
@@ -43,6 +44,10 @@ const RequisitionDetailsForm: React.FC<{
     },
   });
 
+  useEffect(() => {
+    setReqData(values);
+  },[values]);
+
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
       <Box width="100%">
@@ -66,7 +71,7 @@ const RequisitionDetailsForm: React.FC<{
           error={errors?.noOfOpenings}
           touched={touched?.noOfOpenings}
         />
-        <FormSelect
+        <FormExport
           label="Gender"
           name="gender"
           placeholder="Select gender"
@@ -77,7 +82,7 @@ const RequisitionDetailsForm: React.FC<{
           touched={touched.gender}
           value={values.gender}
         />
-        <FormSelect
+        <FormExport
           label="Urgency"
           name="urgency"
           placeholder="Select urgency"
@@ -99,3 +104,7 @@ const RequisitionDetailsForm: React.FC<{
 };
 
 export default RequisitionDetailsForm;
+function aync(e: any, any: any) {
+  throw new Error("Function not implemented.");
+}
+

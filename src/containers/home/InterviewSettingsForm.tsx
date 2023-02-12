@@ -1,6 +1,6 @@
 import { Button, Flex, Box } from "@chakra-ui/react";
-import React from "react";
-import FormSelect from "../../components/formComponents/FormSelect";
+import { useEffect } from "react";
+import FormExport from "../../components/formComponents/FormExport";
 import { useFormik } from "formik";
 import { PageNumbers } from "../../interface/home";
 import { IInterViewSettings } from "../../interface/forms";
@@ -9,10 +9,12 @@ import {
   interviewLanguageOptions,
   interviewModeOptions,
 } from "./constants";
+import * as Yup from "yup";
 
 const InterviewDetailsForm: React.FC<{
-  handleTab: (n: PageNumbers) => void;
-}> = ({ handleTab }) => {
+  handleTab: (n: PageNumbers) => void,
+  setInterviewData: (m: IInterViewSettings) => void;
+}> = ({ handleTab, setInterviewData }) => {
   const {
     errors,
     touched,
@@ -26,16 +28,24 @@ const InterviewDetailsForm: React.FC<{
       interviewDuration: "",
       interviewLanguage: "",
     },
+    validationSchema: Yup.object().shape({
+      interviewMode: Yup.string().required("Interview Mode is required"),
+      interviewDuration: Yup.string().required("Interview Duration is required"),
+      interviewLanguage: Yup.string().required("Interview Language is required"),
+    }),
     onSubmit: (values) => {
-      console.log({ values });
+      // console.log({ values });
       alert("Form successfully submitted");
     },
   });
 
+  useEffect(() => {
+    setInterviewData(values);
+  },[values]);
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
       <Box width="100%">
-        <FormSelect
+        <FormExport
           label="Interview Mode"
           placeholder="Select interview mode"
           name="interviewMode"
@@ -46,7 +56,7 @@ const InterviewDetailsForm: React.FC<{
           error={errors?.interviewMode}
           touched={touched?.interviewMode}
         />
-        <FormSelect
+        <FormExport
           label="Interview Duration"
           placeholder="Select interview duration"
           name="interviewDuration"
@@ -57,7 +67,7 @@ const InterviewDetailsForm: React.FC<{
           error={errors?.interviewDuration}
           touched={touched?.interviewDuration}
         />
-        <FormSelect
+        <FormExport
           label="Job Location"
           name="interviewLanguage"
           placeholder="Select interview language"

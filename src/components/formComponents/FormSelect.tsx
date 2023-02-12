@@ -91,6 +91,8 @@ const FormSelect: React.FC<IFormSelectProps> = ({
           }),
         }}
         {...selectProps}
+        menuPortalTarget={document.body} 
+        menuPosition={'fixed'}
       />
       {children}
     </FromWrapper>
