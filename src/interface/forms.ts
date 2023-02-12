@@ -1,5 +1,6 @@
 import { FormControlProps, InputProps } from "@chakra-ui/react";
 import { FormikErrors, FormikTouched } from "formik";
+import { Props } from "react-select";
 
 export interface IFormInputProps {
   name: string;
@@ -68,4 +69,11 @@ export interface IRequisitionDetails {
   noOfOpenings: number;
   urgency: string;
   gender: string;
+}
+
+export interface IFormSelectProps extends Omit<IFormInputProps, "inputProps" | "type" | "onChange" | "onBlur"> {
+  options: { label: string; value: string }[] | any;
+  selectProps?: Props;
+  onChange?: any;
+  onBlur?: any;
 }

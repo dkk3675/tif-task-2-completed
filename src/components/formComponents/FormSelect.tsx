@@ -1,16 +1,8 @@
 import React from "react";
 import { useTheme } from "@chakra-ui/react";
 import FromWrapper from "./FormWrapper";
-import { IFormInputProps } from "@src/interface/forms";
-import ReactSelect, { Props } from "react-select";
-
-interface IFormSelectProps
-  extends Omit<IFormInputProps, "inputProps" | "type" | "onChange" | "onBlur"> {
-  options: { label: string; value: string }[] | any;
-  selectProps?: Props;
-  onChange?: any;
-  onBlur?: any;
-}
+import { IFormSelectProps } from "@src/interface/forms";
+import ReactSelect from "react-select";
 
 const FormSelect: React.FC<IFormSelectProps> = ({
   name,
