@@ -5,4 +5,17 @@ const FormExport = dynamic(() => import('./FormSelect'), { ssr: false })
 
 FormExport.displayName = 'FormExport';
 
-export default (props:IFormSelectProps) => <FormExport name={props.name} label={props.label} placeholder={props.placeholder} value={props.value} onChange={props.onChange} onBlur={props.onBlur} error={props.error} touched={props.touched} selectProps={props.selectProps} children={props.children} helperText={props.helperText} wrapperProps={props.wrapperProps} options={props.options} />
+export default ({
+    name,
+    label,
+    placeholder,
+    value,
+    onChange,
+    onBlur,
+    error,
+    touched,
+    selectProps,
+    children,
+    helperText,
+    wrapperProps,
+    options,}:IFormSelectProps) => <FormExport name={name} label={label} placeholder={placeholder} value={value} onChange={onChange} onBlur={onBlur} error={error} touched={touched} selectProps={selectProps} children={children} helperText={helperText} wrapperProps={wrapperProps} options={options} />
